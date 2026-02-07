@@ -1,0 +1,20 @@
+{
+    "version": "0.3.0",
+    "description": "Synchronizing the clipboard between different OS. (GUI version)",
+    "homepage": "https://github.com/GOKORURI007/sync-clipboard",
+    "license": "MIT",
+    "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.0/sync-clipboard-gui-windows.exe",
+    "hash": "sha256:132646FE67B26A6BD8B27912D9E490722E049DDEF3104E2C7FD9D0C547E75A58",
+    "shortcuts": [
+        [
+            "sync-clipboard-gui-windows.exe",
+            "Sync Clipboard"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/GOKORURI007/sync-clipboard"
+    },
+    "autoupdate": {
+        "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v$version/sync-clipboard-gui-windows.exe"
+    }
+}

@@ -27,4 +27,5 @@ scoop install ruri/<app_name>
 <!-- Your edits will be lost the next time makeindex.ps1 is run -->
 |Name|Version|Description|
 |----|-------|-----------|
-|[example](https://zxtune.bitbucket.io/)|[r5100](https://zxtune.bitbucket.io/downloads.xml)|A cross-platform chiptunes player.|
+|[sync-clipboard](https://github.com/GOKORURI007/sync-clipboard)|[0.3.0](https://github.com/GOKORURI007/sync-clipboard)|Synchronizing the clipboard between different OS.|
+|[sync-clipboard-gui](https://github.com/GOKORURI007/sync-clipboard)|[0.3.0](https://github.com/GOKORURI007/sync-clipboard)|Synchronizing the clipboard between different OS. (GUI version)|
