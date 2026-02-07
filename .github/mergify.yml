@@ -1,0 +1,12 @@
+pull_request_rules:
+  - name: auto merge for hash fix
+    conditions:
+      - and:
+        - or:
+          - author=github-actions[bot]
+          - author=hoilc
+        - title~=^.*Fix hash$
+        - check-success~=Powershell.*
+    actions:
+      merge:
+        method: squash

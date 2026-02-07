@@ -1,0 +1,46 @@
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '0 */3 * * *'
+name: Excavator
+jobs:
+  excavate:
+    name: Excavate
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false
+    - name: Show rate limit for GitHub API (Before)
+      shell: powershell
+      run: |
+        gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /rate_limit
+      env:
+        GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    - name: Check Manifests Without Version Variables
+      id: check-manifests-without-version-vars
+      shell: powershell
+      run: |
+        bin/checkNoVersionVariables.ps1 -StartTime $env:CHECK_START_TIME -EndTime $env:CHECK_END_TIME -Blacklist $env:CHECK_BLACKLIST
+      env:
+        CHECK_START_TIME: '00:00'
+        CHECK_END_TIME: '03:00'
+        CHECK_BLACKLIST: 'blb2txt,balabolka,balcon'
+    - name: Excavate
+      uses: ScoopInstaller/Scoop-GithubActions@main
+      env:
+        USER_EMAIL: hoilc@foxmail.com
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        SKIP_UPDATED: '1'
+        SCOOP_GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        SCOOP_REPO: 'https://github.com/hoilc/scoop'
+        SCOOP_BRANCH: 'release-v0.5.2'
+        THROW_ERROR: '0'
+        SPECIAL_SNOWFLAKES: ${{ steps.check-manifests-without-version-vars.outputs.manifestsWithoutVersion }}
+    - name: Show rate limit for GitHub API (After)
+      shell: powershell
+      run: |
+        gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /rate_limit
+      env:
+        GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

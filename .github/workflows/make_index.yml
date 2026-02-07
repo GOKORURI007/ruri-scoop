@@ -1,0 +1,20 @@
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '0 0 * * *'
+name: Make Index
+jobs:
+  makeIndex:
+    name: makeIndex
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@main
+    - run: |
+        bin/makeindex.ps1
+    - uses: EndBug/add-and-commit@v9
+      with:
+        add: 'README.md'
+        branch: master
+        author_name: hoilc
+        author_email: hoilc@foxmail.com
+        message: '(chore): update app index [scoop skip]'
