@@ -5,12 +5,21 @@
     "license": "MIT",
     "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.0/sync-clipboard-gui-windows.exe",
     "hash": "sha256:132646FE67B26A6BD8B27912D9E490722E049DDEF3104E2C7FD9D0C547E75A58",
+    "pre_install": "scripts\\sync-clipboard-gui\\pre_install.ps1",
+    "post_uninstall": "scripts\\sync-clipboard-gui\\post_uninstall.ps1",
+    "bin": [
+        [
+            "sync-clipboard-gui.cmd",
+            "sync-clipboard-gui"
+        ]
+    ],
     "shortcuts": [
         [
-            "sync-clipboard-gui-windows.exe",
+            "sync-clipboard-gui.cmd",
             "Sync Clipboard"
         ]
     ],
+    "persist": ["settings"],
     "checkver": {
         "github": "https://github.com/GOKORURI007/sync-clipboard"
     },
