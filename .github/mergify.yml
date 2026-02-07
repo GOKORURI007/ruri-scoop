@@ -4,7 +4,7 @@ pull_request_rules:
       - and:
         - or:
           - author=github-actions[bot]
-          - author=hoilc
+          - author=GOUKOURURI007
         - title~=^.*Fix hash$
         - check-success~=Powershell.*
     actions:

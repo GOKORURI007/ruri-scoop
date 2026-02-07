@@ -11,5 +11,5 @@ jobs:
     - name: PullRequestHandler
       uses: ScoopInstaller/Scoop-GithubActions@main
       env:
-        GITH_EMAIL: hoilc@foxmail.com
+        GITH_EMAIL: yjc.goukou@foxmail.com
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

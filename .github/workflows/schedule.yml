@@ -30,12 +30,9 @@ jobs:
     - name: Excavate
       uses: ScoopInstaller/Scoop-GithubActions@main
       env:
-        USER_EMAIL: hoilc@foxmail.com
+        USER_EMAIL: yjc.goukou@foxmail.com
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         SKIP_UPDATED: '1'
-        SCOOP_GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        SCOOP_REPO: 'https://github.com/hoilc/scoop'
-        SCOOP_BRANCH: 'release-v0.5.2'
         THROW_ERROR: '0'
         SPECIAL_SNOWFLAKES: ${{ steps.check-manifests-without-version-vars.outputs.manifestsWithoutVersion }}
     - name: Show rate limit for GitHub API (After)

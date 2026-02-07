@@ -24,7 +24,7 @@ jobs:
         git init --initial-branch=master
         git remote add origin git@codeberg.org:gokoruri007/ruri-scoop.git
         git config user.name 'github-actions[bot]'
-        git config user.email 'qq@yjc.anonaddy.me'
+        git config user.email 'yjc.goukou@foxmail.com'
         git config core.sshCommand "ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/.git_ssh_key"
         git fetch
         git checkout master

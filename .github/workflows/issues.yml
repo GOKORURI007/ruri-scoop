@@ -17,5 +17,5 @@ jobs:
       uses: ScoopInstaller/Scoop-GithubActions@main
       if: github.event.action == 'opened' || (github.event.action == 'labeled' && contains(github.event.issue.labels.*.name, 'verify'))
       env:
-        GITH_EMAIL: hoilc@foxmail.com
+        GITH_EMAIL: yjc.goukou@foxmail.com
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

@@ -15,6 +15,6 @@ jobs:
       with:
         add: 'README.md'
         branch: master
-        author_name: hoilc
-        author_email: hoilc@foxmail.com
+        author_name: GOUKOURURI007
+        author_email: yjc.goukou@foxmail.com
         message: '(chore): update app index [scoop skip]'

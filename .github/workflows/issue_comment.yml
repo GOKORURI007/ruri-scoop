@@ -12,5 +12,5 @@ jobs:
       uses: ScoopInstaller/Scoop-GithubActions@main
       if: startsWith(github.event.comment.body, '/verify')
       env:
-        GITH_EMAIL: hoilc@foxmail.com
+        GITH_EMAIL: yjc.goukou@foxmail.com
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
