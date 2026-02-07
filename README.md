@@ -9,7 +9,7 @@
 To add this bucket to scoop, run the following command in PowerShell:
 
 ```
-scoop bucket add ruri https://github.com/goukoruri007/ruri-scoop
+scoop bucket add ruri https://github.com/gokoruri007/ruri-scoop
 ```
 
 then
