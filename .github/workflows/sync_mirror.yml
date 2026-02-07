@@ -22,9 +22,9 @@ jobs:
         mkdir mirror
         cd mirror
         git init --initial-branch=master
-        git remote add origin git@codeberg.org:hoilc/scoop-lemon.git
+        git remote add origin git@codeberg.org:gokoruri007/ruri-scoop.git
         git config user.name 'github-actions[bot]'
-        git config user.email 'hoilc@foxmail.com'
+        git config user.email 'qq@yjc.anonaddy.me'
         git config core.sshCommand "ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/.git_ssh_key"
         git fetch
         git checkout master

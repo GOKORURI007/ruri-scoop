@@ -1,4 +1,4 @@
-# scoop-lemon Bucket
+# ruri-scoop Bucket
 
 [![Excavator](https://github.com/gokoruri007/ruri-scoop/actions/workflows/schedule.yml/badge.svg)](https://github.com/gokoruri007/ruri-scoop/actions/workflows/schedule.yml)
 [![Manifests](https://img.shields.io/github/directory-file-count/gokoruri007/ruri-scoop/bucket?type=file&extension=json&style=flat&label=Manifests)](https://github.com/gokoruri007/ruri-scoop/tree/master/bucket)
