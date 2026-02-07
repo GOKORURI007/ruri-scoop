@@ -1,20 +1,21 @@
 {
-    "version": "0.3.1",
-    "description": "Synchronizing the clipboard between different OS.",
-    "homepage": "https://github.com/GOKORURI007/sync-clipboard",
-    "license": "MIT",
-    "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.1/sync-clipboard-windows.exe",
-    "hash": "4c99ce1c993471be60672c14590c6316dad4da9fee52817457bddce6c92a6138",
-    "bin": [
-        [
-            "sync-clipboard-windows.exe",
-            "sync-clipboard"
-        ]
-    ],
-    "checkver": {
-        "github": "https://github.com/GOKORURI007/sync-clipboard"
-    },
-    "autoupdate": {
-        "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v$version/sync-clipboard-windows.exe"
-    }
+  "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
+  "version": "0.3.1",
+  "description": "Synchronizing the clipboard between different OS.",
+  "homepage": "https://github.com/GOKORURI007/sync-clipboard",
+  "license": "MIT",
+  "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.1/sync-clipboard-windows.exe",
+  "hash": "4c99ce1c993471be60672c14590c6316dad4da9fee52817457bddce6c92a6138",
+  "bin": [
+    [
+      "sync-clipboard-windows.exe",
+      "sync-clipboard"
+    ]
+  ],
+  "checkver": {
+    "github": "https://github.com/GOKORURI007/sync-clipboard"
+  },
+  "autoupdate": {
+    "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v$version/sync-clipboard-windows.exe"
+  }
 }
