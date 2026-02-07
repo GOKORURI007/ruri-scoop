@@ -6,7 +6,7 @@
     },
     "json.schemas": [
         {
-            "url": "https://scoop-lemon.tari.xyz/hosted/schema.json",
+            "url": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
             "fileMatch": [
                 ".vscode/Template.jsonc",
                 "TODO/*.json",
