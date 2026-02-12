@@ -26,6 +26,7 @@ jobs:
       uses: actions/checkout@main
       with:
         repository: ScoopInstaller/Scoop
+        ref: v0.3.0 # Pester 4
         path: 'scoop_core'
     - name: Checkout Scoop Main
       uses: actions/checkout@main
@@ -35,7 +36,7 @@ jobs:
     - name: Cache PS Modules
       uses: potatoqualitee/psmodulecache@v6.2.1
       with:
-        modules-to-cache: Pester, PSScriptAnalyzer, BuildHelpers
+        modules-to-cache: Pester:4.10.1, PSScriptAnalyzer, BuildHelpers
         shell: powershell
     - name: Cache Helpers
       uses: actions/cache@v5
