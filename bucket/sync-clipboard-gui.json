@@ -1,30 +1,30 @@
 {
-  "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
-  "version": "0.3.1",
-  "description": "Synchronizing the clipboard between different OS. (GUI version)",
-  "homepage": "https://github.com/GOKORURI007/sync-clipboard",
-  "license": "MIT",
-  "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.1/sync-clipboard-gui-windows.exe",
-  "hash": "21219591b53b8b7d96940842a331da965e08457bad71414697e7e1142723cd2b",
-  "post_uninstall": "scripts\\sync-clipboard-gui\\post_uninstall.ps1",
-  "bin": [
-    [
-      "sync-clipboard-gui-windows.exe",
-      "sync-clipboard-gui"
-    ]
-  ],
-  "shortcuts": [
-    [
-      "sync-clipboard-gui-windows.exe",
-      "Sync Clipboard",
-      "--config \"settings\\config.json\""
-    ]
-  ],
-  "persist": "settings",
-  "checkver": {
-    "github": "https://github.com/GOKORURI007/sync-clipboard"
-  },
-  "autoupdate": {
-    "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v$version/sync-clipboard-gui-windows.exe"
-  }
+    "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
+    "version": "0.3.2",
+    "description": "Synchronizing the clipboard between different OS. (GUI version)",
+    "homepage": "https://github.com/GOKORURI007/sync-clipboard",
+    "license": "MIT",
+    "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.2/sync-clipboard-gui-windows.exe",
+    "hash": "8e71459130d0b862ff6c68ab5d79447f0d34379e8f17cbd18f27dd71d4e0cb8b",
+    "post_uninstall": "scripts\\sync-clipboard-gui\\post_uninstall.ps1",
+    "bin": [
+        [
+            "sync-clipboard-gui-windows.exe",
+            "sync-clipboard-gui"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "sync-clipboard-gui-windows.exe",
+            "Sync Clipboard",
+            "--config \"settings\\config.json\""
+        ]
+    ],
+    "persist": "settings",
+    "checkver": {
+        "github": "https://github.com/GOKORURI007/sync-clipboard"
+    },
+    "autoupdate": {
+        "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v$version/sync-clipboard-gui-windows.exe"
+    }
 }
