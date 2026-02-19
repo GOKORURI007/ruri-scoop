@@ -28,5 +28,5 @@ scoop install ruri/<app_name>
 |Name|Version|Description|
 |----|-------|-----------|
 |[lan-mouse-latest](https://github.com/feschber/lan-mouse)|[0.10.0](https://github.com/feschber/lan-mouse)|A software KVM switch for sharing mouse and keyboard between multiple computers over the network.|
-|[sync-clipboard](https://github.com/GOKORURI007/sync-clipboard)|[0.3.2](https://github.com/GOKORURI007/sync-clipboard)|Synchronizing the clipboard between different OS.|
-|[sync-clipboard-gui](https://github.com/GOKORURI007/sync-clipboard)|[0.3.2](https://github.com/GOKORURI007/sync-clipboard)|Synchronizing the clipboard between different OS. (GUI version)|
+|[sync-clipboard](https://github.com/GOKORURI007/sync-clipboard)|[0.3.3](https://github.com/GOKORURI007/sync-clipboard)|Synchronizing the clipboard between different OS.|
+|[sync-clipboard-gui](https://github.com/GOKORURI007/sync-clipboard)|[0.3.3](https://github.com/GOKORURI007/sync-clipboard)|Synchronizing the clipboard between different OS. (GUI version)|
