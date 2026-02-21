@@ -5,7 +5,7 @@
     "homepage": "https://github.com/feschber/lan-mouse",
     "license": "GPL-3.0-only",
     "url": "https://github.com/feschber/lan-mouse/releases/download/latest/lan-mouse-windows.zip",
-    "hash": "09b7eff470056146e71676576261dd4d4a70b99c0758f7975eab99189347bb55",
+    "hash": "62687fb2f7df68f5f720d92e7758cee030b5468f1cc49b263851028354e2e295",
     "bin": "lan-mouse.exe",
     "shortcuts": [
         [
