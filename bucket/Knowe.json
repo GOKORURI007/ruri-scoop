@@ -1,0 +1,33 @@
+{
+    "version": "1.0.37",
+    "description": "Knowe - AI multi-agent group chat application",
+    "homepage": "https://github.com/HirezmingD/Knowe-agent-groupchat",
+    "license": "Unknown",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/HirezmingD/Knowe-agent-groupchat/releases/download/v1.0.37/Knowe-Setup-1.0.37.exe#/setup.exe",
+            "hash": "6903c97d1a955a7dbf0474ea862ec3a69b1191eda5c7c710e8d1af6b91d83fee"
+        }
+    },
+    "pre_install": [
+        "Expand-7zipArchive \"$dir\\setup.exe\" \"$dir\\_nsis\" -Switches '-t#'",
+        "Expand-7zipArchive \"$dir\\_nsis\\`$PLUGINSDIR\\app-64.7z\" \"$dir\"",
+        "Remove-Item \"$dir\\_nsis\", \"$dir\\setup.exe\" -Recurse -Force"
+    ],
+    "shortcuts": [
+        [
+            "Knowe.exe",
+            "Knowe"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/HirezmingD/Knowe-agent-groupchat"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/HirezmingD/Knowe-agent-groupchat/releases/download/v$version/Knowe-Setup-$version.exe#/setup.exe"
+            }
+        }
+    }
+}
