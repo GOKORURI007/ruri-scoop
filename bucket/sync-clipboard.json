@@ -1,0 +1,21 @@
+{
+    "$schema": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
+    "version": "0.3.3",
+    "description": "Synchronizing the clipboard between different OS.",
+    "homepage": "https://github.com/GOKORURI007/sync-clipboard",
+    "license": "MIT",
+    "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v0.3.3/sync-clipboard-windows.exe",
+    "hash": "13780efff26e7b500bd4872d70f2ff6aaddf7480fe71c41085b59e560fd85fca",
+    "bin": [
+        [
+            "sync-clipboard-windows.exe",
+            "sync-clipboard"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/GOKORURI007/sync-clipboard"
+    },
+    "autoupdate": {
+        "url": "https://github.com/GOKORURI007/sync-clipboard/releases/download/v$version/sync-clipboard-windows.exe"
+    }
+}
