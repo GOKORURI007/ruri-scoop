@@ -71,7 +71,7 @@ jobs:
           git diff --quiet || git commit -m "ci: auto-update README app table" -a
           git push
       - name: Install and cache test dependencies
-        uses: potatoqualitee/psmodulecache@9e4f63833c22c1768d648e115a9c849afdda22a5 # v6.3
+        uses: potatoqualitee/psmodulecache@v6.3
         with:
           modules-to-cache: BuildHelpers, Pester
           shell: ${{ matrix.shell }}
