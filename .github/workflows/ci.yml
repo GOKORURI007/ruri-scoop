@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   test:
@@ -33,45 +33,15 @@ jobs:
         with:
           repository: ScoopInstaller/Scoop
           path: 'scoop_core'
-      - name: Generate README app table
+      - name: Debug directory structure
         shell: pwsh
         run: |
-          $bucketDir = 'my_bucket/bucket'
-          $manifests = Get-ChildItem $bucketDir -Filter '*.json' | Where-Object { $_.Name -notmatch '\.template$' }
-
-          $rows = @()
-          foreach ($manifest in $manifests) {
-              $json = Get-Content $manifest.FullName -Raw | ConvertFrom-Json
-              $name = [System.IO.Path]::GetFileNameWithoutExtension($manifest.Name)
-              $description = if ($json.description) { $json.description } else { '-' }
-              $rows += "| $name | $description |"
-          }
-
-          $table = "| 应用 | 描述 |`n|------|------|`n" + ($rows -join "`n")
-          $readmePath = 'my_bucket/README.md'
-
-          if (Test-Path $readmePath) {
-              $content = Get-Content $readmePath -Raw
-              if ($content -match '(?s)(?<=<!-- APPS_TABLE_START -->).*(?=<!-- APPS_TABLE_END -->)') {
-                  $content = $content -replace '(?s)(?<=<!-- APPS_TABLE_START -->).*(?=<!-- APPS_TABLE_END -->)', "`n$table`n"
-              } else {
-                  $newSection = "`n<!-- APPS_TABLE_START -->`n$table`n<!-- APPS_TABLE_END -->`n"
-                  if ($content -match '(?s)(## 已收录的应用.*?)(?=##|\z)') {
-                      $content = $content -replace '(?s)(## 已收录的应用.*?)(?=##|\z)', "`$1$newSection"
-                  }
-              }
-              Set-Content -Path $readmePath -Value $content -Encoding UTF8
-              Write-Host "Updated README with app table"
-          }
-      - name: Commit updated README
-        shell: pwsh
-        run: |
-          Set-Location 'my_bucket'
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git pull --rebase
-          git diff --quiet || git commit -m "ci: auto-update README app table" -a
-          git push
+          Write-Host "=== Current directory ==="
+          pwd
+          Write-Host "=== Repository root ==="
+          (Get-Location).Path
+          Write-Host "=== my_bucket contents ==="
+          Get-ChildItem 'my_bucket' -Recurse -Depth 2 | Select-Object FullName
       - name: Install and cache test dependencies
         uses: potatoqualitee/psmodulecache@v6.3
         with:
