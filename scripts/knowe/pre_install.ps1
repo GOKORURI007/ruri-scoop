@@ -1,4 +1,4 @@
-﻿# 创建包含 $PLUGINSDIR 的目录（必须转义 $）
+# 创建包含 $PLUGINSDIR 的目录（必须转义 $）
 New-Item -ItemType Directory -Force "$dir\_nsis\`$PLUGINSDIR" -ErrorAction SilentlyContinue | Out-Null
 
 # 静默解压 setup.exe（重定向所有输出到 null）
