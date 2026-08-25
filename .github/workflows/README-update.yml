@@ -1,0 +1,45 @@
+name: README Auto-Update
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+    paths:
+      - 'bucket/**/*.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    name: Update App Table
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          path: 'my_bucket'
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Generate and update README
+        run: |
+          cd my_bucket
+          uv run --python 3.13 --with mistune ../scripts/update-readme.py
+      - name: Commit and push
+        run: |
+          cd my_bucket
+          pwd
+          ls -la
+          git status
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md
+          if ! git diff --quiet --cached; then
+            git commit -m "ci: auto-update README app table"
+            git push
+          else
+            echo "No changes to commit"
+          fi

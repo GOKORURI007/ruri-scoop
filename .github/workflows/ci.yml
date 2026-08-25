@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   test:
@@ -23,13 +23,13 @@ jobs:
         shell: ${{ matrix.shell }}
     steps:
       - name: Checkout Bucket
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v4
         with:
           # Need at least 2 commits to properly gather changed files for linting
           fetch-depth: 2
           path: 'my_bucket'
       - name: Checkout Scoop
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v4
         with:
           repository: ScoopInstaller/Scoop
           path: 'scoop_core'
@@ -53,44 +53,3 @@ jobs:
           }
           $result = Invoke-Pester -Configuration $pesterConfig
           exit $result.FailedCount
-      - name: Generate README app table
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        shell: pwsh
-        run: |
-          $bucketDir = 'my_bucket/bucket'
-          $manifests = Get-ChildItem $bucketDir -Filter '*.json' | Where-Object { $_.Name -notmatch '\.template$' }
-
-          $rows = @()
-          foreach ($manifest in $manifests) {
-              $json = Get-Content $manifest.FullName -Raw | ConvertFrom-Json
-              $name = [System.IO.Path]::GetFileNameWithoutExtension($manifest.Name)
-              $description = if ($json.description) { $json.description } else { '-' }
-              $rows += "| $name | $description |"
-          }
-
-          $table = "| 应用 | 描述 |`n|------|------|`n" + ($rows -join "`n")
-          $readmePath = 'my_bucket/README.md'
-
-          if (Test-Path $readmePath) {
-              $content = Get-Content $readmePath -Raw
-              if ($content -match '(?s)(?<=<!-- APPS_TABLE_START -->).*(?=<!-- APPS_TABLE_END -->)') {
-                  $content = $content -replace '(?s)(?<=<!-- APPS_TABLE_START -->).*(?=<!-- APPS_TABLE_END -->)', "`n$table`n"
-              } else {
-                  $newSection = "`n<!-- APPS_TABLE_START -->`n$table`n<!-- APPS_TABLE_END -->`n"
-                  if ($content -match '(?s)(## 已收录的应用.*?)(?=##|\z)') {
-                      $content = $content -replace '(?s)(## 已收录的应用.*?)(?=##|\z)', "`$1$newSection"
-                  }
-              }
-              Set-Content -Path $readmePath -Value $content -Encoding UTF8
-              Write-Host "Updated README with app table"
-          }
-      - name: Commit updated README
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        shell: pwsh
-        run: |
-          # Current directory is the repo root (D:\a\ruri-scoop\ruri-scoop)
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git pull --rebase
-          git diff --quiet || git commit -m "ci: auto-update README app table" -a
-          git push
