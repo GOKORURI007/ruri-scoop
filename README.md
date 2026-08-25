@@ -28,3 +28,4 @@ scoop install ruri-scoop/<app-name>
 
 欢迎提交新的 manifest。请先阅读 [Scoop 贡献指南](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md) 和 [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)。
 
+
