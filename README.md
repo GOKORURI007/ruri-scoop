@@ -6,14 +6,10 @@
 
 ## 已收录的应用
 
+<!-- APPS_TABLE_START -->
 | 应用 | 描述 |
 |------|------|
-| Knowe | - |
-| capptivo | - |
-| lan-mouse-latest | - |
-| openless-no-ime | - |
-| sync-clipboard-gui | - |
-| sync-clipboard | - |
+<!-- APPS_TABLE_END -->
 
 ## 安装
 
