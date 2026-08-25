@@ -41,7 +41,6 @@ jobs:
       - name: Run tests
         run: |
           $env:SCOOP_HOME = (Convert-Path '.\scoop_core')
-          Import-Module BuildHelpers -MinimumVersion 2.0.1
           Import-Module Pester -MinimumVersion 5.2.0
           $pesterConfig = New-PesterConfiguration -Hashtable @{
               Run    = @{
