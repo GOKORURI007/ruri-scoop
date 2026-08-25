@@ -40,5 +40,17 @@ jobs:
           shell: ${{ matrix.shell }}
       - name: Run tests
         run: |
-          $env:SCOOP_HOME="$(Convert-Path '.\scoop_core')"
-          .\my_bucket\bin\test.ps1
+          $env:SCOOP_HOME = (Convert-Path '.\scoop_core')
+          Import-Module BuildHelpers -MinimumVersion 2.0.1
+          Import-Module Pester -MinimumVersion 5.2.0
+          $pesterConfig = New-PesterConfiguration -Hashtable @{
+              Run    = @{
+                  Path                     = '.\my_bucket'
+                  PassThru                 = $true
+                  FailOnNullOrEmptyForEach = $false
+              }
+              Output = @{ Verbosity = 'Detailed' }
+              Should = @{ ErrorAction = 'Continue' }
+          }
+          $result = Invoke-Pester -Configuration $pesterConfig
+          exit $result.FailedCount
