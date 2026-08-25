@@ -1,42 +1,27 @@
-# Scoop Bucket Template
+# Ruri Scoop Bucket
 
-<!-- Uncomment the following line after replacing placeholders -->
-<!-- [![Tests](https://github.com/<username>/<bucketname>/actions/workflows/ci.yml/badge.svg)](https://github.com/<username>/<bucketname>/actions/workflows/ci.yml) [![Excavator](https://github.com/<username>/<bucketname>/actions/workflows/excavator.yml/badge.svg)](https://github.com/<username>/<bucketname>/actions/workflows/excavator.yml) -->
+[![Tests](https://github.com/GOKORURI007/ruri-scoop/actions/workflows/ci.yml/badge.svg)](https://github.com/GOKORURI007/ruri-scoop/actions/workflows/ci.yml)
 
-Template bucket for [Scoop](https://scoop.sh), the Windows command-line installer.
+我的个人 Scoop bucket，用于 Windows 命令行包管理。
 
-## How do I use this template?
+## 已收录的应用
 
-1. Generate your own copy of this repository with the "Use this template"
-   button.
-2. Allow all GitHub Actions:
-   - Navigate to `Settings` - `Actions` - `General` - `Actions permissions`.
-   - Select `Allow all actions and reusable workflows`.
-   - Then `Save`.
-3. Workflow permissions:
-   - Navigate to `Settings` - `Actions` - `General` - `Workflow permissions`.
-   - Ensure `Read repository contents and packages permissions` is selected.
-   - Then `Save`.
-4. Document the bucket in `README.md`.
-5. Replace the placeholder repository string in `bin/auto-pr.ps1`.
-6. Create new manifests by copying `bucket/app-name.json.template` to
-   `bucket/<app-name>.json`.
-7. Commit and push changes.
-8. If you'd like your bucket to be indexed on `https://scoop.sh`, add the
-   topic `scoop-bucket` to your repository.
+| 应用 | 描述 |
+|------|------|
+| Knowe | - |
+| capptivo | - |
+| lan-mouse-latest | - |
+| openless-no-ime | - |
+| sync-clipboard-gui | - |
+| sync-clipboard | - |
 
-## How do I install these manifests?
-
-After manifests have been committed and pushed, run the following:
+## 安装
 
 ```pwsh
-scoop bucket add <bucketname> https://github.com/<username>/<bucketname>
-scoop install <bucketname>/<manifestname>
+scoop bucket add ruri-scoop https://github.com/GOKORURI007/ruri-scoop
+scoop install ruri-scoop/<app-name>
 ```
 
-## How do I contribute new manifests?
+## 贡献
 
-To make a new manifest contribution, please read the [Contributing
-Guide](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md)
-and [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)
-wiki page.
+欢迎提交新的 manifest。请先阅读 [Scoop 贡献指南](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md) 和 [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)。
