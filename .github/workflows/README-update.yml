@@ -6,7 +6,7 @@ on:
       - 'main'
       - 'master'
     paths:
-      - 'bucket/**/*.json'
+      - 'my_bucket/bucket/**/*.json'
   workflow_dispatch:
 
 permissions:
@@ -26,7 +26,7 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la scripts/
+          ls -la my_bucket/
       - name: Install uv
         run: curl -LsSf https://astral.sh/uv/install.sh | sh
       - name: Generate and update README
