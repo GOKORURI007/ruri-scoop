@@ -1,0 +1,163 @@
+lockfile_version: '1'
+apm_version: 0.33.0
+dependencies:
+- repo_url: gokoruri007/skills
+  materialization_repo_url: GOKORURI007/skills
+  name: dev-tools
+  host: github.com
+  resolved_commit: 9617ed6a309ff09755c898bf2e59e0cba1bae9a1
+  resolved_ref: master
+  version: 0.1.0
+  virtual_path: packages/dev-tools
+  is_virtual: true
+  package_type: skill_bundle
+  deployed_files:
+  - .agents/skills/create-scoop-manifest
+  - .agents/skills/create-scoop-manifest/SKILL.md
+  - .agents/skills/create-scoop-manifest/create-scoop-manifest/SKILL.md
+  - .agents/skills/create-scoop-manifest/create-scoop-manifest/scripts/fetch-windows-assets.mjs
+  - .agents/skills/create-scoop-manifest/scripts/fetch-windows-assets.mjs
+  - .agents/skills/gh-debug-action
+  - .agents/skills/gh-debug-action/SKILL.md
+  - .agents/skills/git-commit
+  - .agents/skills/git-commit/SKILL.md
+  - .agents/skills/git-commit/agents/openai.yaml
+  - .agents/skills/git-squash
+  - .agents/skills/git-squash/SKILL.md
+  - .agents/skills/git-squash/agents/openai.yaml
+  deployed_file_hashes:
+    .agents/skills/create-scoop-manifest/SKILL.md: sha256:bdecc4524b1727fc2e388a2f17e449576c7a566bd4fc104aca02b66c2a8a9dc2
+    .agents/skills/create-scoop-manifest/create-scoop-manifest/SKILL.md: sha256:3e06c80889735d9f4a8becc35e596882ccdbe5e6a08888b0942c252a7b7255f3
+    .agents/skills/create-scoop-manifest/create-scoop-manifest/scripts/fetch-windows-assets.mjs: sha256:c83b9d57819cf74d63d86d244b74b6dd0f07b55204ade2808de648d3bfdcd425
+    .agents/skills/create-scoop-manifest/scripts/fetch-windows-assets.mjs: sha256:c83b9d57819cf74d63d86d244b74b6dd0f07b55204ade2808de648d3bfdcd425
+    .agents/skills/gh-debug-action/SKILL.md: sha256:0962ef920334cbdc239a8ff7c357015a9fec3aaa4fda9953d82ed00ae7d09034
+    .agents/skills/git-commit/SKILL.md: sha256:cd84720c7ddb279674427af8b0cc55e062e0e004adc13b236c95b38803a6c921
+    .agents/skills/git-commit/agents/openai.yaml: sha256:c49561fdb6cd5279801c70ef82482d491fbeb5456de982e78ff03a1c9ddc4464
+    .agents/skills/git-squash/SKILL.md: sha256:abf5afa8a688b27d7081ca580a81561576749cbf6cf9d2c8fa8aaadc77dae140
+    .agents/skills/git-squash/agents/openai.yaml: sha256:549877af79acc4e9e18fc9e8ca60375c35e6ab2cffdcad75297df29390ae1c77
+  content_hash: sha256:0bbb0258e02ee2ef55b6ed2291a64c508ab6b3240dba416ef2b3216aabc05549
+  discovered_via: ruri-skills
+  marketplace_plugin_name: dev-tools
+  skill_subset:
+  - create-scoop-manifest
+  - gh-debug-action
+  - git-commit
+  - git-squash
+deployments:
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/create-scoop-manifest
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/create-scoop-manifest/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:bdecc4524b1727fc2e388a2f17e449576c7a566bd4fc104aca02b66c2a8a9dc2
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/create-scoop-manifest/create-scoop-manifest/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:3e06c80889735d9f4a8becc35e596882ccdbe5e6a08888b0942c252a7b7255f3
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/create-scoop-manifest/create-scoop-manifest/scripts/fetch-windows-assets.mjs
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:c83b9d57819cf74d63d86d244b74b6dd0f07b55204ade2808de648d3bfdcd425
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/create-scoop-manifest/scripts/fetch-windows-assets.mjs
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:c83b9d57819cf74d63d86d244b74b6dd0f07b55204ade2808de648d3bfdcd425
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/gh-debug-action
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/gh-debug-action/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:0962ef920334cbdc239a8ff7c357015a9fec3aaa4fda9953d82ed00ae7d09034
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/git-commit
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/git-commit/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:cd84720c7ddb279674427af8b0cc55e062e0e004adc13b236c95b38803a6c921
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/git-commit/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:c49561fdb6cd5279801c70ef82482d491fbeb5456de982e78ff03a1c9ddc4464
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/git-squash
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: null
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/git-squash/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:abf5afa8a688b27d7081ca580a81561576749cbf6cf9d2c8fa8aaadc77dae140
+- kind: project-relative
+  target: agent-skills
+  value: .agents/skills/git-squash/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - gokoruri007/skills/packages/dev-tools
+  active_owner: gokoruri007/skills/packages/dev-tools
+  content_hash: sha256:549877af79acc4e9e18fc9e8ca60375c35e6ab2cffdcad75297df29390ae1c77
