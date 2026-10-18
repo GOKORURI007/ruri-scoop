@@ -15,6 +15,7 @@
 | openless-no-ime | An open-source, privacy-focused voice-input application |
 | sync-clipboard-gui | Synchronizing the clipboard between different OS. (GUI version) |
 | sync-clipboard | Synchronizing the clipboard between different OS. |
+| vscode | Lightweight but powerful source code editor |
 <!-- APPS_TABLE_END -->
 
 ## 安装
@@ -24,8 +25,32 @@ scoop bucket add ruri-scoop https://github.com/GOKORURI007/ruri-scoop
 scoop install ruri-scoop/<app-name>
 ```
 
+## VS Code 与 Windows 11 右键菜单
+
+`vscode` 基于 `ScoopInstaller/Extras` 的 manifest，保留 x64 / ARM64 下载、自动更新、便携数据及文件关联功能，配套脚本位于本 bucket 的 `scripts/vscode`，无需安装 extras bucket。
+
+```powershell
+scoop install ruri-scoop/vscode
+$codeDir = scoop prefix vscode
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$codeDir\install-win11-menu.ps1"
+```
+
+在普通、非管理员终端运行菜单脚本。脚本注册 VS Code 自带的微软签名扩展，将其放到正确的版本资源目录下，并启用当前用户的 `VSCodeContextMenu` 注册表项，使文件、文件夹及文件夹空白处的 **Open with Code** 出现在 Win11 一级菜单。首次安装应用不会自动启用菜单；用户启用后，普通 Scoop 安装在升级时自动重新注册。
+
+撤销一级菜单：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$codeDir\uninstall-win11-menu.ps1"
+```
+
+安装目录保留 `install-win11-context.reg` 和 `uninstall-win11-context.reg`。首次启用时备份已有注册表项，生成可恢复原状态的 uninstall 文件；升级保留备份。`.reg` 只控制标题和显示开关，完整安装/撤销必须使用 `.ps1`，以同时处理 Appx 扩展。备份与启用状态按用户保存在便携数据目录 `data/ruri-win11-menu/<SID>`。直接导入 uninstall 注册表不会关闭自动注册状态，请使用撤销脚本。
+
+正常卸载会清理当前用户通过脚本启用的菜单。全局安装的菜单仍属于各个用户：每个用户需在升级后手动重新运行安装脚本，并在全局卸载前运行撤销脚本。不要同时用其他发行方式的 VS Code 注册同名菜单扩展；撤销脚本不恢复其他发行方式的 Appx 注册。
+
+传统菜单仍可通过 `reg import "$codeDir\install-context.reg"` 添加、通过 `uninstall-context.reg` 撤销，在 Win11 中位于“显示更多选项”。原生菜单暂未刷新时，可重启 Windows 资源管理器，无需改成传统右键菜单。
+
+上游同步基线：extras 的 VS Code `1.142.0`（manifest 提交 `1bc779eb22`）。后续自动更新沿用上游版本和 SHA-256 检查规则；如上游调整扩展布局，脚本会报错而非注册错误路径。
+
 ## 贡献
 
 欢迎提交新的 manifest。请先阅读 [Scoop 贡献指南](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md) 和 [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)。
-
-

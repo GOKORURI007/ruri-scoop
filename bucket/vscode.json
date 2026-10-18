@@ -1,0 +1,139 @@
+{
+    "version": "1.142.0",
+    "description": "Lightweight but powerful source code editor",
+    "homepage": "https://code.visualstudio.com/",
+    "license": {
+        "identifier": "Freeware",
+        "url": "https://code.visualstudio.com/License/"
+    },
+    "notes": [
+        "Windows 11 first-level context menu (current user; run in a normal, non-elevated terminal):",
+        "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$dir\\install-win11-menu.ps1\"",
+        "Undo the Windows 11 menu and restore its previous registry state:",
+        "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$dir\\uninstall-win11-menu.ps1\"",
+        "The paired install-win11-context.reg / uninstall-win11-context.reg control the menu title/visibility only; use the scripts for Appx registration/removal.",
+        "Once enabled, the menu is re-registered on upgrades for this user. Global installs require each user to run the scripts again after updates and uninstall before removal.",
+        "If the menu is cached, restart Windows Explorer. Do not install another VS Code distribution alongside this menu integration.",
+        "For the classic context menu (Windows 11: Show more options), run:",
+        "reg import \"$dir\\install-context.reg\"",
+        "Undo the classic menu: reg import \"$dir\\uninstall-context.reg\"",
+        "For file associations, run:",
+        "reg import \"$dir\\install-associations.reg\"",
+        "For github integration, run:",
+        "reg import \"$dir\\install-github-integration.reg\""
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://update.code.visualstudio.com/1.142.0/win32-x64-archive/stable#/dl.7z",
+            "hash": "ace1da7d1432d43c1ab4b2bbf643f6494f6d25dec07494976755eac522cd50d9"
+        },
+        "arm64": {
+            "url": "https://update.code.visualstudio.com/1.142.0/win32-arm64-archive/stable#/dl.7z",
+            "hash": "06e1323f2cfa095c371ebbe0f33f3da3c19ea266ea6999a4e7f25329b787d645"
+        }
+    },
+    "post_install": [
+        "$scriptdir = \"$bucketsdir\\$bucket\\scripts\\vscode\"",
+        "if (!(Test-Path -LiteralPath $scriptdir)) { throw 'Install vscode from this bucket by name so its companion scripts can be located.' }",
+        "$dirpath = \"$dir\".Replace('\\', '\\\\')",
+        "$exepath = \"$dir\\Code.exe\".Replace('\\', '\\\\')",
+        "$versionfolder = Get-ChildItem -LiteralPath $dir -Directory | Where-Object {",
+        "    ($_.Name -match '^[a-fA-F0-9]+$') -and (Test-Path -LiteralPath \"$($_.FullName)\\resources\" -PathType Container)",
+        "} | Select-Object -First 1 -ExpandProperty Name",
+        "'install-associations', 'uninstall-associations', 'install-context', 'uninstall-context', 'install-github-integration', 'uninstall-github-integration' | ForEach-Object {",
+        "    if (Test-Path \"$scriptdir\\$_.reg\") {",
+        "        $content = Get-Content \"$scriptdir\\$_.reg\"",
+        "        $content = $content.Replace('$codedir', $dirpath)",
+        "        $content = $content.Replace('$code', $exepath)",
+        "        if ($versionfolder) {",
+        "            $content = $content.Replace('$versionfolder', $versionfolder)",
+        "        } else {",
+        "            $content = $content.Replace('\\\\$versionfolder', '')",
+        "        }",
+        "        if ($global) {",
+        "            $content = $content.Replace('HKEY_CURRENT_USER', 'HKEY_LOCAL_MACHINE')",
+        "        }",
+        "        $content | Set-Content -Path \"$dir\\$_.reg\"",
+        "    }",
+        "}",
+        "# Re-register file associations if they are already registered to this installation",
+        "$regpath = 'HKCU:\\Software\\Classes\\CodeOSS.*\\shell\\open\\command'",
+        "if ($global) {",
+        "    $regpath = $regpath.Replace('HKCU', 'HKLM')",
+        "}",
+        "$command = Get-ItemPropertyValue $regpath -Name '(default)' -ErrorAction Ignore",
+        "if ($command -and ($command -match [regex]::escape($(appdir $app $global)))) {",
+        "    info 'Re-registering file associations...'",
+        "    reg import \"$dir\\install-associations.reg\"",
+        "}",
+        "",
+        "if (!(Test-Path \"$dir\\data\\extensions\") -and (Test-Path \"$env:USERPROFILE\\.vscode\\extensions\")) {",
+        "    info '[Portable Mode] Copying extensions...'",
+        "    Copy-Item \"$env:USERPROFILE\\.vscode\\extensions\" \"$dir\\data\" -Recurse",
+        "}",
+        "if (!(Test-Path \"$dir\\data\\user-data\") -and (Test-Path \"$env:AppData\\Code\")) {",
+        "    info '[Portable Mode] Copying user data...'",
+        "    Copy-Item \"$env:AppData\\Code\" \"$dir\\data\\user-data\" -Recurse",
+        "}",
+        "$extensions_file = \"$dir\\data\\extensions\\extensions.json\"",
+        "if ((Test-Path \"$extensions_file\")) {",
+        "    info 'Adjusting path in extensions file...'",
+        "    (Get-Content \"$extensions_file\") -replace '(?<=vscode(/|\\\\\\\\)).*?(?=(/|\\\\\\\\)data(/|\\\\\\\\)extensions)', $version | Set-Content \"$extensions_file\"",
+        "}",
+        "",
+        "# Windows 11 integration is per-user, including for global Scoop installations.",
+        "'install-win11-context.reg', 'uninstall-win11-context.reg', 'install-win11-menu.ps1', 'uninstall-win11-menu.ps1', 'win11-menu.ps1' | ForEach-Object {",
+        "    Copy-Item -LiteralPath \"$scriptdir\\$_\" -Destination \"$dir\\$_\" -Force",
+        "}",
+        "$sid = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
+        "if (!$global -and (Test-Path -LiteralPath \"$dir\\data\\ruri-win11-menu\\$sid\\enabled\")) {",
+        "    info 'Re-registering the Windows 11 context menu...'",
+        "    & \"$env:SystemRoot\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -File \"$dir\\install-win11-menu.ps1\"",
+        "    if ($LASTEXITCODE -ne 0) { throw 'Windows 11 menu registration failed. Run install-win11-menu.ps1 again after resolving the error.' }",
+        "}"
+    ],
+    "env_add_path": "bin",
+    "shortcuts": [
+        [
+            "code.exe",
+            "Visual Studio Code"
+        ]
+    ],
+    "persist": "data",
+    "uninstaller": {
+        "script": [
+            "if ($cmd -eq 'uninstall') {",
+            "    $sid = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
+            "    if (Test-Path -LiteralPath \"$dir\\data\\ruri-win11-menu\\$sid\\uninstall-win11-context.reg\") {",
+            "        & \"$env:SystemRoot\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -File \"$dir\\uninstall-win11-menu.ps1\"",
+            "        if ($LASTEXITCODE -ne 0) { throw 'Windows 11 menu cleanup failed. Run uninstall-win11-menu.ps1 before uninstalling.' }",
+            "    }",
+            "    reg import \"$dir\\uninstall-context.reg\"",
+            "    reg import \"$dir\\uninstall-associations.reg\"",
+            "    reg import \"$dir\\uninstall-github-integration.reg\"",
+            "}"
+        ]
+    },
+    "checkver": {
+        "url": "https://update.code.visualstudio.com/api/update/win32-x64-archive/stable/latest",
+        "jsonpath": "$.name"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://update.code.visualstudio.com/$version/win32-x64-archive/stable#/dl.7z",
+                "hash": {
+                    "url": "https://update.code.visualstudio.com/api/versions/$version/win32-x64-archive/stable",
+                    "jsonpath": "$.sha256hash"
+                }
+            },
+            "arm64": {
+                "url": "https://update.code.visualstudio.com/$version/win32-arm64-archive/stable#/dl.7z",
+                "hash": {
+                    "url": "https://update.code.visualstudio.com/api/versions/$version/win32-arm64-archive/stable",
+                    "jsonpath": "$.sha256hash"
+                }
+            }
+        }
+    }
+}
