@@ -16,6 +16,7 @@
 | sync-clipboard-gui | Synchronizing the clipboard between different OS. (GUI version) |
 | sync-clipboard | Synchronizing the clipboard between different OS. |
 | vscode | Lightweight but powerful source code editor |
+| zed | High-performance, multiplayer code editor with Windows 11 context menu integration. |
 <!-- APPS_TABLE_END -->
 
 ## 安装
@@ -50,6 +51,30 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$codeDir\uninstall-win1
 传统菜单仍可通过 `reg import "$codeDir\install-context.reg"` 添加、通过 `uninstall-context.reg` 撤销，在 Win11 中位于“显示更多选项”。原生菜单暂未刷新时，可重启 Windows 资源管理器，无需改成传统右键菜单。
 
 上游同步基线：extras 的 VS Code `1.142.0`（manifest 提交 `1bc779eb22`）。后续自动更新沿用上游版本和 SHA-256 检查规则；如上游调整扩展布局，脚本会报错而非注册错误路径。
+
+## Zed 与 Windows 11 右键菜单
+
+`zed` 同步自 `ScoopInstaller/Extras` 的 `1.24.2` manifest，保留 x64 / ARM64 下载、校验及自动更新规则。
+
+```powershell
+scoop install ruri-scoop/zed
+$zedDir = scoop prefix zed
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$zedDir\install-win11-menu.ps1"
+```
+
+在普通、非管理员终端中启用菜单。脚本将 Zed 自带的签名扩展绑定到 Scoop 的 `current\appx`，并设置当前用户的 `ZedContextMenu` 注册表项，使 **Open with Zed** 用于文件、文件夹和文件夹空白处。它可以替换旧安装路径遗留的失效菜单。
+
+首次安装应用不自动启用菜单；手动启用后，普通 Scoop 安装在升级时自动重新注册。菜单状态和注册表备份按用户保存在持久目录 `ruri-win11-menu/<SID>`，不改变 Zed 原有的配置存储位置。请关闭 Zed 内置自动更新，使用 Scoop 更新，避免重新安装到其他目录后导致菜单失效。
+
+撤销菜单：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$zedDir\uninstall-win11-menu.ps1"
+```
+
+安装目录保留成对的 `install-win11-context.reg` 和 `uninstall-win11-context.reg`；后者在首次启用时生成，恢复原来的注册表状态，升级时保留原始备份。仅导入 `.reg` 不会完整撤销 Appx 注册或关闭自动注册，请使用 `.ps1`。撤销不会恢复此前其他安装方式的 Appx 绑定。
+
+正常卸载会清理当前用户通过本脚本启用的菜单。全局安装时，每个用户应在升级后手动重新注册，并在卸载应用前撤销菜单。避免多个 Zed 安装同时争用同名菜单扩展。若菜单未刷新，可重新启动 Windows 资源管理器。
 
 ## 贡献
 

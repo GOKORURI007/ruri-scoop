@@ -63,3 +63,5 @@ jobs:
           exit $result.FailedCount
       - name: Test VS Code menu lifecycle without changing Windows settings
         run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\my_bucket\scripts\vscode\test-win11-menu.ps1
+      - name: Test Zed menu lifecycle without changing Windows settings
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\my_bucket\scripts\zed\test-win11-menu.ps1
