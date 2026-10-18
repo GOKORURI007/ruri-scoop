@@ -9,10 +9,10 @@
     "notes": [
         "Windows 11 first-level context menu (current user; run in a normal, non-elevated terminal):",
         "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$dir\\install-win11-menu.ps1\"",
-        "Undo the Windows 11 menu and restore its previous registry state:",
+        "Remove the Windows 11 menu package and registry entry:",
         "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$dir\\uninstall-win11-menu.ps1\"",
         "The paired install-win11-context.reg / uninstall-win11-context.reg control the menu title/visibility only; use the scripts for Appx registration/removal.",
-        "Once enabled, the menu is re-registered on upgrades for this user. Global installs require each user to run the scripts again after updates and uninstall before removal.",
+        "The menu uses current\\shell\\appx. Upgrades refresh its files without re-registering; if a future release changes the extension package identity or manifest, run the install script again.",
         "If the menu is cached, restart Windows Explorer. Do not install another VS Code distribution alongside this menu integration.",
         "For the classic context menu (Windows 11: Show more options), run:",
         "reg import \"$dir\\install-context.reg\"",
@@ -82,15 +82,11 @@
         "}",
         "",
         "# Windows 11 integration is per-user, including for global Scoop installations.",
-        "'install-win11-context.reg', 'uninstall-win11-context.reg', 'install-win11-menu.ps1', 'uninstall-win11-menu.ps1', 'win11-menu.ps1' | ForEach-Object {",
+        "'install-win11-context.reg', 'uninstall-win11-context.reg', 'install-win11-menu.ps1', 'uninstall-win11-menu.ps1', 'win11-menu.ps1', 'prepare-win11-menu.ps1' | ForEach-Object {",
         "    Copy-Item -LiteralPath \"$scriptdir\\$_\" -Destination \"$dir\\$_\" -Force",
         "}",
-        "$sid = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
-        "if (!$global -and (Test-Path -LiteralPath \"$dir\\data\\ruri-win11-menu\\$sid\\enabled\")) {",
-        "    info 'Re-registering the Windows 11 context menu...'",
-        "    & \"$env:SystemRoot\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -File \"$dir\\install-win11-menu.ps1\"",
-        "    if ($LASTEXITCODE -ne 0) { throw 'Windows 11 menu registration failed. Run install-win11-menu.ps1 again after resolving the error.' }",
-        "}"
+        "# Prepare the fixed layout on every installation; do not register the menu automatically.",
+        "& \"$dir\\prepare-win11-menu.ps1\" -InstallDir $dir | Out-Null"
     ],
     "env_add_path": "bin",
     "shortcuts": [
@@ -103,11 +99,8 @@
     "uninstaller": {
         "script": [
             "if ($cmd -eq 'uninstall') {",
-            "    $sid = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
-            "    if (Test-Path -LiteralPath \"$dir\\data\\ruri-win11-menu\\$sid\\uninstall-win11-context.reg\") {",
-            "        & \"$env:SystemRoot\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -File \"$dir\\uninstall-win11-menu.ps1\"",
-            "        if ($LASTEXITCODE -ne 0) { throw 'Windows 11 menu cleanup failed. Run uninstall-win11-menu.ps1 before uninstalling.' }",
-            "    }",
+            "    & \"$env:SystemRoot\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -File \"$dir\\uninstall-win11-menu.ps1\"",
+            "    if ($LASTEXITCODE -ne 0) { throw 'Windows 11 menu cleanup failed. Run uninstall-win11-menu.ps1 before uninstalling.' }",
             "    reg import \"$dir\\uninstall-context.reg\"",
             "    reg import \"$dir\\uninstall-associations.reg\"",
             "    reg import \"$dir\\uninstall-github-integration.reg\"",
