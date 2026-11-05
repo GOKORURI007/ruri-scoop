@@ -33,7 +33,7 @@ Scoop 从「bucket」仓库里的 JSON manifest 安装 Windows 应用。本技�
    ```bash
    node ~/.agents/skills/create-scoop-manifest/scripts/fetch-windows-assets.mjs <owner>/<repo> [tag]
    ```
-   
+
    会打印 tag、剥掉 `v` 的版本号、每个 Windows 资源的 URL、大小和 sha256。
 
 3. **写 `bucket/<appname>.json`**
