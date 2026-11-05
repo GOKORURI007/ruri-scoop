@@ -16,6 +16,7 @@
 | sync-clipboard-gui | Synchronizing the clipboard between different OS. (GUI version) |
 | sync-clipboard | Synchronizing the clipboard between different OS. |
 | vscode | Lightweight but powerful source code editor |
+| xterminal | SSH client and local terminal with file management and AI assistance. |
 | zed | High-performance, multiplayer code editor with Windows 11 context menu integration. |
 <!-- APPS_TABLE_END -->
 
