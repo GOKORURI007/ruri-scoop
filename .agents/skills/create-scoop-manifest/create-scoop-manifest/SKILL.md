@@ -1,6 +1,6 @@
 ---
 name: create-scoop-manifest
-description: 为 Windows 应用生成 Scoop bucket manifest(bucket/<appname>.json),让它可以通过 Scoop 包管理器安装。当用户说「生成 scoop manifest」「加到 scoop」「给 scoop bucket 打包」「提交 PR 到 scoop-extras / scoop-cn / ScoopInstaller/Extras」,或者任何需要为 Windows 安装包(NSIS .exe、MSI、便携式 .zip)写 JSON manifest 的场景,都触发本技能。常见触发词包括「scoop manifest」「scoop bucket」「scoop 安装 manifest」,以及明确要把应用加进某个 Scoop bucket 的请求。项目必须发布带稳定 URL 的 Windows 资源(通常是 GitHub Releases)。如果项目只发 macOS / Linux 包,Scoop 不适用,不要触发。
+description: 为 Windows 应用生成 Scoop bucket manifest(bucket/appname.json),让它可以通过 Scoop 包管理器安装。当用户说「生成 scoop manifest」「加到 scoop」「给 scoop bucket 打包」「提交 PR 到 scoop-extras / scoop-cn / ScoopInstaller/Extras」,或者任何需要为 Windows 安装包(NSIS .exe、MSI、便携式 .zip)写 JSON manifest 的场景,都触发本技能。常见触发词包括「scoop manifest」「scoop bucket」「scoop 安装 manifest」,以及明确要把应用加进某个 Scoop bucket 的请求。项目必须发布带稳定 URL 的 Windows 资源(通常是 GitHub Releases)。如果项目只发 macOS / Linux 包,Scoop 不适用,不要触发。
 ---
 
 # 创建 Scoop Manifest
@@ -45,11 +45,18 @@ Scoop 从「bucket」仓库里的 JSON manifest 安装 Windows 应用。本技�
    - `checkver.github`:仓库 URL。如果 tag 带 `v` 前缀,加 `regex: "v([\\d.]+)"`,让 Scoop 读出真正的版本号。
    - `autoupdate.url`:用 `$version` 重新拼资源 URL。注意这里的 version **不带** `v` 前缀。
 
-4. **校验**
-   - 把本地目录加成一个测试 bucket:`scoop bucket add test <仓库绝对路径>/bucket`。
-   - `scoop info <appname>`——确认 manifest 能解析,会打印 license / bin / shortcuts。
-   - `scoop cat <appname>`——打印解析后的 JSON。
-   - 如果没装 Scoop,至少跑 `node -e "require('./bucket/<appname>.json')"` 检查 JSON 语法,再 `curl -I` 一下 `url` 字段确认 200。
+4. **同步 README 应用清单**
+   - 新增、删除或重命名 manifest，以及修改应用描述后，检查仓库 README 是否维护应用表；若维护，须在本次变更中同步，不能只等待 CI。
+   - 优先读取并运行仓库现有生成脚本。例如 ruri-scoop 在仓库根目录运行 `python scripts/update-readme.py`，更新 `APPS_TABLE_START` / `APPS_TABLE_END` 之间的清单；不要改动标记外的说明。没有生成脚本时，按现有表格格式补齐。
+   - 核对清单与实际发布的 `bucket/*.json` 一一对应（按仓库约定排除模板），应用名取文件名，描述取 manifest，检查遗漏、重复及已删除条目。
+   - 若已有自动更新工作流，确认 `on.push.paths` 使用仓库相对路径，例如 `bucket/**/*.json`；不要把 checkout 的工作目录前缀写入过滤条件。工作流只是补充，不替代本地同步。
+
+5. **校验并确认完成**
+   - 先读取仓库 `AGENTS.md` 和测试入口，按要求在本地实际运行测试；依赖版本以入口及其加载脚本的 `#Requires` 为准，缺少时先安装。必须确认测试被发现、实际执行且通过，不能只看退出码；有阻碍则说明，不宣称完成。
+   - ruri-scoop 要求在根目录分别运行 `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\bin\test.ps1` 和 `pwsh -NoProfile -File .\bin\test.ps1`，通过后才能提交、推送或报告完成。
+   - `scoop info`、`scoop cat`、JSON/schema、下载地址、哈希和 `checkver` 校验作为补充，不能代替仓库测试。
+   - 新增或修改解压、安装脚本时，在隔离临时目录实际验证，确认主程序、快捷方式目标及必要资源存在，中间文件已清理。
+   - 检查 README 生成结果及文本格式，遵守 `.editorconfig` / `.gitattributes`，保留末尾换行、去除行尾空格。最终说明列出清单同步情况、执行过的测试及结果；提交与推送仍以用户授权为准。
 
 ## 模板 A:便携式安装(优先用这个)
 

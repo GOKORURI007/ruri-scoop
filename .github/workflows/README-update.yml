@@ -6,7 +6,9 @@ on:
       - 'main'
       - 'master'
     paths:
-      - 'my_bucket/bucket/**/*.json'
+      - 'bucket/**/*.json'
+      - 'scripts/update-readme.py'
+      - '.github/workflows/README-update.yml'
   workflow_dispatch:
 
 permissions:

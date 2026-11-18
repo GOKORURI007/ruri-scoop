@@ -10,14 +10,19 @@
 | 应用 | 描述 |
 |------|------|
 | capptivo | Free and open-source screen recorder and editor with smart follow-cursor zoom, click-based auto zooms, editor presets, and on-device captions. |
+| edgeterm | Lightweight terminal, SSH, Telnet, SFTP, FTP and serial client. |
+| hanaagent | HanaAgent - a personal AI agent with memory and soul |
 | Knowe | Knowe - AI multi-agent group chat application |
 | lan-mouse-latest | A software KVM switch for sharing mouse and keyboard between multiple computers over the network. |
+| oh-my-ppt | Oh My PPT - Local-first AI presentation workbench |
 | openless-no-ime | An open-source, privacy-focused voice-input application |
+| rssh | SSH client with SFTP, port forwarding, session recording and AI assistance. |
+| sageport | SSH workbench with terminal, SFTP, monitoring, port forwarding, automation, and an AI assistant. |
 | sync-clipboard-gui | Synchronizing the clipboard between different OS. (GUI version) |
 | sync-clipboard | Synchronizing the clipboard between different OS. |
 | vscode | Lightweight but powerful source code editor |
 | xterminal | SSH client and local terminal with file management and AI assistance. |
-| zed | High-performance, multiplayer code editor with Windows 11 context menu integration. |
+| zed | Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. It's also open source. |
 <!-- APPS_TABLE_END -->
 
 ## 安装
