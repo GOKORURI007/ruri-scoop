@@ -9,10 +9,10 @@
 <!-- APPS_TABLE_START -->
 | 应用 | 描述 |
 |------|------|
+| Knowe | Knowe - AI multi-agent group chat application |
 | capptivo | Free and open-source screen recorder and editor with smart follow-cursor zoom, click-based auto zooms, editor presets, and on-device captions. |
 | edgeterm | Lightweight terminal, SSH, Telnet, SFTP, FTP and serial client. |
 | hanaagent | HanaAgent - a personal AI agent with memory and soul |
-| Knowe | Knowe - AI multi-agent group chat application |
 | lan-mouse-latest | A software KVM switch for sharing mouse and keyboard between multiple computers over the network. |
 | oh-my-ppt | Oh My PPT - Local-first AI presentation workbench |
 | openless-no-ime | An open-source, privacy-focused voice-input application |
