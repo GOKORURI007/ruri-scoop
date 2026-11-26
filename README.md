@@ -10,6 +10,8 @@
 | 应用 | 描述 |
 |------|------|
 | Knowe | Knowe - AI multi-agent group chat application |
+| abgox.scoop-install | Install Scoop apps using configured download proxies |
+| abgox.scoop-update | Update Scoop apps using configured download proxies |
 | capptivo | Free and open-source screen recorder and editor with smart follow-cursor zoom, click-based auto zooms, editor presets, and on-device captions. |
 | drawio | Portable draw.io Desktop with local plugin support |
 | edgeterm | Lightweight terminal, SSH, Telnet, SFTP, FTP and serial client. |
