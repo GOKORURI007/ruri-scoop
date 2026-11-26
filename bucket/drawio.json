@@ -1,12 +1,12 @@
 {
-    "version": "32.7.4.2",
+    "version": "32.7.4.3",
     "description": "Portable draw.io Desktop with local plugin support",
     "homepage": "https://github.com/GOKORURI007/drawio-desktop",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/GOKORURI007/drawio-desktop/releases/download/v32.7.4.2/drawio-desktop-32.7.4.2-windows-x64.zip",
-            "hash": "03f21a11072dc23bb4b3d8790d2710b1a02ecd66e7b3a7b63e467464c2d6561a"
+            "url": "https://github.com/GOKORURI007/drawio-desktop/releases/download/v32.7.4.3/drawio-desktop-32.7.4.3-windows-x64.zip",
+            "hash": "bf615aad29bd8618bf1b76fb657fb2f9602f5f4df527712a52fe92d2ef40b115"
         }
     },
     "bin": "drawio.exe",
